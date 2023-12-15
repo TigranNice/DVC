@@ -1,0 +1,34 @@
+stages:
+  prepare:
+    cmd: python prepare_data.py data/iris.csv
+    deps:
+    - data/iris.csv
+    - prepare_data.py
+    outs:
+    - data/prepare
+  train:
+    cmd: python train_model.py data/prepare data/train
+    deps:
+    - data/prepare/data.csv
+    - train_model.py
+    params:
+    - train.learning_rate
+    - train.num_epochs
+    - train.test_size
+    outs:
+    - data/train
+  evaluate:
+    cmd: python evaluate_model.py data/train data/evaluate
+    deps:
+    - data/train/X_test.pkl
+    - data/train/losses_test.csv
+    - data/train/losses_train.csv
+    - data/train/model.pkl
+    - data/train/y_test.pkl
+    - evaluate_model.py
+    outs:
+    - data/evaluate
+metrics:
+  - data/evaluate/metrics.json
+plots:
+  - data/evaluate/losses.png
