@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import os
 import sys 
 import pickle
+import json
 
 import torch
 import torch.nn as nn
@@ -67,6 +68,9 @@ def accuracy_graph(model, X_test, y_test, path):
     with torch.no_grad():
         predictions_test = model(X_test)
     test_acc  = get_accuracy_multiclass(predictions_test,y_test)
+
+    with open(os.path.join(path,'metrics.json'), 'w') as f:
+        json.dump(f'{test_acc}', f)
     
 def loss_graph(model, l_train, l_test, path):
     plt.figure(figsize=(10,10))

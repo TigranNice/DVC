@@ -28,3 +28,7 @@ stages:
     - evaluate_model.py
     outs:
     - data/evaluate
+metrics:
+  - data/evaluate/metrics.json
+plots:
+  - data/evaluate/losses.png
