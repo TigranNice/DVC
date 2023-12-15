@@ -30,37 +30,37 @@ stages:
       size: 3685
     params:
       params.yaml:
-        train.learning_rate: 0.001
-        train.num_epochs: 1000
+        train.learning_rate: 0.01
+        train.num_epochs: 100
         train.test_size: 0.2
     outs:
     - path: data/train
       hash: md5
-      md5: 2e23c267aafbea3d258901d8020165d3.dir
-      size: 64978
+      md5: 50570a3c865d2ebdfadff13c8c02f400.dir
+      size: 19031
       nfiles: 5
   evaluate:
     cmd: python evaluate_model.py data/train data/evaluate
     deps:
     - path: data/train/X_test.pkl
       hash: md5
-      md5: 3574b2d201930d7103eff244368561b5
+      md5: b4cfec429b973ef960949bc40bb1caea
       size: 879
     - path: data/train/losses_test.csv
       hash: md5
-      md5: 25ef4ee556985dbea756070e448fa3e0
-      size: 25378
+      md5: 3527cce23e2638ae7f7528afdb271c57
+      size: 2304
     - path: data/train/losses_train.csv
       hash: md5
-      md5: 72e68c9c6bc8d1b29a7496f85e923963
-      size: 25197
+      md5: 821d749f485e0ca92390639e80815ec3
+      size: 2324
     - path: data/train/model.pkl
       hash: md5
-      md5: 47c0fa853b772abe919b942c7802bec6
+      md5: 874ed883a7de1b3708ccfcffd0fdf394
       size: 12890
     - path: data/train/y_test.pkl
       hash: md5
-      md5: 41813bb3963b79a76e97e69a47c99312
+      md5: 160dcbf67a5d0e737dfff394a323036c
       size: 634
     - path: evaluate_model.py
       hash: md5
@@ -69,6 +69,6 @@ stages:
     outs:
     - path: data/evaluate
       hash: md5
-      md5: 687b736afe7a7376a7540a3f8a36ce2b.dir
-      size: 33552
+      md5: 9d2acebf3d7805673cdcb8118b79bd1a.dir
+      size: 38010
       nfiles: 2
