@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python prepare_data.py data/iris.csv
+    deps:
+    - path: data/iris.csv
+      hash: md5
+      md5: 341a3b5244f213282b7b0920b729c592
+      size: 3975
+    - path: prepare_data.py
+      hash: md5
+      md5: 946872cfa4ccbccef0ac72b66ddb59e3
+      size: 590
+    outs:
+    - path: data/prepare
+      hash: md5
+      md5: 77dec59bba928ba760300f03c6ab0cf5.dir
+      size: 3400
+      nfiles: 1
+  train:
+    cmd: python train_model.py data/prepare data/train
+    deps:
+    - path: data/prepare/data.csv
+      hash: md5
+      md5: e5bd2be381c20b45bf409c855dee17fc
+      size: 3400
+    - path: train_model.py
+      hash: md5
+      md5: e9d97ddf1ae2025a86c31ab537b9522f
+      size: 3685
+    params:
+      params.yaml:
+        train.learning_rate: 0.001
+        train.num_epochs: 1000
+        train.test_size: 0.2
+    outs:
+    - path: data/train
+      hash: md5
+      md5: 2e23c267aafbea3d258901d8020165d3.dir
+      size: 64978
+      nfiles: 5
+  evaluate:
+    cmd: python evaluate_model.py data/train data/evaluate
+    deps:
+    - path: data/train/X_test.pkl
+      hash: md5
+      md5: 3574b2d201930d7103eff244368561b5
+      size: 879
+    - path: data/train/losses_test.csv
+      hash: md5
+      md5: 25ef4ee556985dbea756070e448fa3e0
+      size: 25378
+    - path: data/train/losses_train.csv
+      hash: md5
+      md5: 72e68c9c6bc8d1b29a7496f85e923963
+      size: 25197
+    - path: data/train/model.pkl
+      hash: md5
+      md5: 47c0fa853b772abe919b942c7802bec6
+      size: 12890
+    - path: data/train/y_test.pkl
+      hash: md5
+      md5: 41813bb3963b79a76e97e69a47c99312
+      size: 634
+    - path: evaluate_model.py
+      hash: md5
+      md5: c7761f3abbf0dc2259624fff000c9ce0
+      size: 2616
+    outs:
+    - path: data/evaluate
+      hash: md5
+      md5: 2c41985e5f4c85be8840acf809e0def3.dir
+      size: 33547
+      nfiles: 1
